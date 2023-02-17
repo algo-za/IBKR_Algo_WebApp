@@ -1,16 +1,18 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
 @app.route('/')
-def hello_world():  # put application's code here
-    return '<h1>Hello, World!</h1>'
+def index():
+    return render_template('index.html')
 
-@app.route('/about/')
-def about():
-    return '<h3>This is a Flask web application.</h3>'
+@app.route('/cakes')
+def cakes():
+    return render_template('cakes.html')
 
+@app.route('/hello/<name>')
+def hello(name):
+    return render_template('page.html', name=name)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, host='0.0.0.0')
